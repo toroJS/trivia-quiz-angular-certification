@@ -1,0 +1,51 @@
+<h1>QUIZ MAKER</h1>
+
+<ng-template #loading><mat-spinner class="spinner"></mat-spinner></ng-template>
+
+<ng-container *ngIf="!(loading$ | async); else loading">
+  <form style="display: flex" [formGroup]="generateQuizForm">
+    <span class="me-3">
+      Category
+      <select
+        class="form-select mt-1"
+        id="categorySelect"
+        formControlName="category"
+      >
+        <option
+          *ngFor="let category of categories$ | async"
+          [value]="category.id"
+        >
+          {{ category.name }}
+        </option>
+      </select>
+    </span>
+    <span class="me-3">
+      Difficulty
+      <select
+        class="form-select mt-1"
+        id="difficultySelect"
+        formControlName="difficulty"
+      >
+        <option
+          *ngFor="let difficulty of difficultyOptions"
+          [value]="difficulty"
+        >
+          {{ difficulty }}
+        </option>
+      </select>
+    </span>
+    <span class="mt-1">
+      <button
+        id="createBtn"
+        color="primary"
+        mat-raised-button
+        [disabled]="generateQuizForm.invalid"
+        (click)="createQuiz()"
+      >
+        Create
+      </button></span
+    >
+  </form>
+</ng-container>
+
+<app-quiz *ngIf="showQuiz"></app-quiz>

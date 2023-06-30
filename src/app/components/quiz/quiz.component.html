@@ -1,0 +1,22 @@
+<ng-container *ngFor="let questionItem of questions">
+  <p class="mt" [innerHTML]="questionItem.question"></p>
+  <ng-container *ngFor="let option of questionItem.options">
+    <button
+      mat-raised-button
+      [class.selected-answer]="questionItem.selectedOption === option"
+      style="margin-right: 5px"
+      (click)="selectOption(questionItem, option)"
+    >
+      <span [innerHTML]="option"></span>
+    </button>
+  </ng-container>
+</ng-container>
+<button
+  (click)="submitQuiz()"
+  color="primary"
+  class="submit-btn mt"
+  *ngIf="showSubmit"
+  mat-raised-button
+>
+  Submit
+</button>

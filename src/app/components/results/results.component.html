@@ -1,0 +1,30 @@
+<h1>RESULTS</h1>
+<ng-container *ngFor="let questionItem of questions">
+  <p class="mt" [innerHTML]="questionItem.question"></p>
+  <ng-container *ngFor="let option of questionItem.options">
+    <button
+      mat-raised-button
+      [class.correct-answer]="option == questionItem.correctAnswer"
+      [class.wrong-answer]="
+        questionItem.selectedOption === option &&
+        option !== questionItem.correctAnswer
+      "
+      style="margin-right: 5px"
+    >
+      <span [innerHTML]="option"></span>
+    </button>
+  </ng-container>
+</ng-container>
+
+<p class="mt score" [ngClass]="score.status">
+  You scored {{ score.correctQuestions }} out of {{ score.totalQuestions }}
+</p>
+
+<button
+  class="new-quiz-btn mt"
+  color="primary"
+  mat-raised-button
+  [routerLink]="['/quiz-generator']"
+>
+  Create a new quiz
+</button>
